@@ -1,74 +1,67 @@
 // ================ TABS ===================
 
 let header = document.querySelector(".info-header"),
-  tab = document.querySelectorAll(".info-header-tab"),
-  tabContent = document.querySelectorAll(".info-tabcontent");
+	tab = document.querySelectorAll(".info-header-tab"),
+	tabContent = document.querySelectorAll(".info-tabcontent");
 
 function hide(x) {
-  for (let i = x; i < tabContent.length; i++) {
-    tabContent[i].classList.remove("show");
-    tabContent[i].classList.add("hide");
-  }
+	for (let i = x; i < tabContent.length; i++) {
+		tabContent[i].classList.remove("show");
+		tabContent[i].classList.add("hide");
+	}
 }
 hide(1);
 
 function show(x) {
-  for (let i = x; i < tabContent.length; i++) {
-    tabContent[i].classList.remove("hide");
-    tabContent[i].classList.add("show");
-    break;
-  }
+	for (let i = x; i < tabContent.length; i++) {
+		tabContent[i].classList.remove("hide");
+		tabContent[i].classList.add("show");
+		break;
+	}
 }
 
-header.addEventListener("click", function(event) {
-  let target = event.target;
+header.addEventListener("click", function (event) {
+	let target = event.target;
 
-  if (target && target.classList.contains("info-header-tab")) {
-    for (let i = 0; i < tab.length; i++) {
-      if (tab[i] == target) {
-        hide(0);
-        show(i);
-        break;
-      }
-    }
-  }
+	if (target && target.classList.contains("info-header-tab")) {
+		for (let i = 0; i < tab.length; i++) {
+			if (tab[i] == target) {
+				hide(0);
+				show(i);
+				break;
+			}
+		}
+	}
 });
 
 // =================== CLOCK`S =====================
 
 function clockUpdate() {
-  let time = new Date();
-  let hours = time.getHours();
-  let minutes = time.getMinutes();
-  let seconds = time.getSeconds();
+	let time = new Date();
+	let hours = time.getHours();
+	let minutes = time.getMinutes();
+	let seconds = time.getSeconds();
 
-  return {
-    hours: hours,
-    minutes: minutes,
-    seconds: seconds
-  };
+	return {
+		hours: hours,
+		minutes: minutes,
+		seconds: seconds
+	};
 }
 
 function clockOn() {
-  let timer = document.querySelector("#timer"),
-    hours = timer.querySelector(".hours"),
-    minutes = timer.querySelector(".minutes"),
-    seconds = timer.querySelector(".seconds");
+	let timer = document.querySelector("#timer"),
+		hours = timer.querySelector(".hours"),
+		minutes = timer.querySelector(".minutes"),
+		seconds = timer.querySelector(".seconds");
 
-  let timeProperty = clockUpdate();
+	let timeProperty = clockUpdate();
 
-  hours.textContent =
-    timeProperty.hours < 10 ? "0" + timeProperty.hours : timeProperty.hours;
-  minutes.textContent =
-    timeProperty.minutes < 10
-      ? "0" + timeProperty.minutes
-      : timeProperty.minutes;
-  seconds.textContent =
-    timeProperty.seconds < 10
-      ? "0" + timeProperty.seconds
-      : timeProperty.seconds;
+	hours.textContent = timeProperty.hours < 10 ? "0" + timeProperty.hours : timeProperty.hours;
+	minutes.textContent = timeProperty.hours < 10 ? "0" + timeProperty.minutes : timeProperty.minutes;
+	seconds.textContent = timeProperty.seconds < 10 ? "0" + timeProperty.seconds : timeProperty.seconds;
 
-  setTimeout(clockOn, 1000);
+	setTimeout(clockOn, 1000);
 }
 
 clockOn();
@@ -146,28 +139,28 @@ clockOn();
 // Знакомство с КОНСТРУКТОР + this !
 
 class Car {
-  constructor(model, name, color, liter, number) {
-    this.model = model;
-    this.name = name;
-    this.color = color;
-    this.places = 5;
-    this.fuel = "petrol";
-    this.liter = liter;
-    this.number = number;
-  }
-  beep() {
-    console.log(`FA - FA ${this.name}`);
-  }
-  stop() {
-    console.log(`stop the end on way ${this.name}`);
-  }
-  tre(a, b) {
-    console.log("a + b");
-  }
+	constructor(model, name, color, liter, number) {
+		this.model = model;
+		this.name = name;
+		this.color = color;
+		this.places = 5;
+		this.fuel = "petrol";
+		this.liter = liter;
+		this.number = number;
+	}
+	beep() {
+		console.log(`FA - FA ${this.name}`);
+	}
+	stop() {
+		console.log(`stop the end on way ${this.name}`);
+	}
+	tre(a, b) {
+		console.log("a + b");
+	}
 }
 
-Car.prototype.exit = function() {
-  console.log(`привет мир меян зовут ${this.name}`);
+Car.prototype.exit = function () {
+	console.log(`привет мир меян зовут ${this.name}`);
 };
 
 let Daewoo = new Car("Daewoo", "lanos", "black", 10);
@@ -175,13 +168,13 @@ let Daewoo = new Car("Daewoo", "lanos", "black", 10);
 console.log(this);
 
 function test(a, b, d, c, t) {
-  console.log(this.name);
-  console.log(a + b + d + c - t);
+	console.log(this.name);
+	console.log(a + b + d + c - t);
 
-  function test2() {
-    console.log(
-      `меня зовут ${this.name} моя марка ${this.model} и я езжу на ${this.fuel}`
-    );
-  }
-  test2.call(Daewoo);
+	function test2() {
+		console.log(
+			`меня зовут ${this.name} моя марка ${this.model} и я езжу на ${this.fuel}`
+		);
+	}
+	test2.call(Daewoo);
 }
