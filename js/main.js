@@ -20,7 +20,7 @@ function show(x) {
    }
 }
 
-header.addEventListener("click", function(event) {
+header.addEventListener("click", function (event) {
    let target = event.target;
 
    if (target && target.classList.contains("info-header-tab")) {
@@ -45,7 +45,7 @@ function clockUpdate() {
    return {
       hours: hours,
       minutes: minutes,
-      seconds: seconds
+      seconds: seconds,
    };
 }
 
@@ -136,7 +136,7 @@ clockOn();
 // }
 // timerOn();
 
-// Знакомство с КОНСТРУКТОР + this !
+// ============================Знакомство с КОНСТРУКТОР + this !
 
 class Car {
    constructor(model, name, color, liter, number) {
@@ -159,31 +159,80 @@ class Car {
    }
 }
 
-Car.prototype.exit = function() {
+Car.prototype.exit = function () {
    console.log(`привет мир меян зовут ${this.name}`);
 };
 
 let Daewoo = new Car("Daewoo", "lanos", "black", 10);
 
-function test(a, b, d, c, t) {
-   console.log(this.name);
-   console.log(a + b + d + c - t);
+//  =============знакомство с МОДАЛЬНЫМИ ОКНАМИ ===========
 
-   function test2() {
-      console.log(`меня зовут ${this.name} моя марка ${this.model} и я езжу на ${this.fuel}`);
-   }
-   test2.call(Daewoo);
-}
+// let moreBtn = document.querySelector(".more"),
+//    popup = document.querySelector(".overlay"),
+//    popupClose = document.querySelector(".popup-close");
 
-let moreBtn = document.querySelector(".more"),
+// moreBtn.addEventListener("click", function () {
+//    console.log(this);
+//    this.classList.add("more-splash");
+//    popup.style.display = "block";
+// });
+
+// popupClose.addEventListener("click", () => {
+//    popup.style.display = "none";
+// });
+
+// =====================================================================
+
+let container = document.querySelector(".content .container"),
    popup = document.querySelector(".overlay"),
    popupClose = document.querySelector(".popup-close");
 
-moreBtn.addEventListener("click", function() {
-   this.classList.add("more-splash");
-   popup.style.display = "block";
-});
+container.addEventListener("click", function (event) {
+   let target = event.target;
 
+   if ((target && target.classList.contains("more")) || target.classList.contains("description-btn")) {
+      popup.style.display = "block";
+   }
+});
 popupClose.addEventListener("click", () => {
    popup.style.display = "none";
 });
+
+// ========================================================================
+// let popup = document.querySelector(".overlay"),
+//    container = document.querySelector(".content .container"),
+//    popupClose = document.querySelector(".popup-close");
+
+// function modalWindow() {
+//    popup.style.display = "block";
+// }
+// function closeModal() {
+//    popup.style.display = "none";
+// }
+
+// container.addEventListener("click", function (event) {
+//    let target = event.target;
+
+//    if ((target && target.classList.contains("more")) || target.classList.contains("description-btn")) {
+//       console.log(this);
+
+//       modalWindow();
+//    }
+// });
+// popupClose.addEventListener("click", () => {
+//    closeModal();
+// });
+
+// ================================== HW #11======
+
+{
+   /* <input id="age" value="30">
+
+let age = document.getElementById('age');
+
+	function showUser(surname, name) {
+		alert("Пользователь " + surname + " " + name + ", его возраст " + this.value);
+	}
+
+showUser.apply(age, ['chernenko', 'yaroslav']); */
+}
