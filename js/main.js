@@ -236,3 +236,53 @@ let age = document.getElementById('age');
 
 showUser.apply(age, ['chernenko', 'yaroslav']); */
 }
+
+let form = document.querySelector(".main-form"),
+   input = form.getElementsByTagName("input"),
+   statusMessage = document.createElement("div");
+statusMessage.style.cssText = `
+		width : 150px;
+		height : 150px;
+		background-color : red;
+		margin : 0 auto; 
+	`;
+
+let message = {
+   loading: "идет загрузка",
+   success: "спасибо , мы вам презвоним",
+   error: "что-то пошло не так!",
+};
+
+form.addEventListener("submit", function (event) {
+   event.preventDefault();
+
+   let request = new XMLHttpRequest();
+
+   let formData = new FormData(form);
+
+   request.open("POST", "server.php");
+   request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+   request.send(formData);
+
+   request.addEventListener("readystatechange", function () {
+      if (this.readyState < 4) {
+         statusMessage.textContent = message.loading;
+      } else if (this.readyState == 4 && this.status == 200) {
+         statusMessage.textContent = message.success;
+
+         for (let i = 0; i < input.length; i++) {
+            input[i].value = "";
+         }
+         setTimeout(() => {
+            form.style.display = "none";
+            document.querySelector(".popup-form").appendChild(statusMessage);
+            setTimeout(() => {
+               form.style.display = "block";
+               statusMessage.remove();
+            }, 2000);
+         }, 6000);
+      } else {
+         statusMessage.textContent = message.error;
+      }
+   });
+});
